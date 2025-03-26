@@ -1,5 +1,6 @@
-import { Component, Input, computed, inject, input } from '@angular/core';
+import { Component, Input, OnInit, computed, inject, input } from '@angular/core';
 import { UsersService } from '../users.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-user-tasks',
@@ -7,10 +8,25 @@ import { UsersService } from '../users.service';
   templateUrl: './user-tasks.component.html',
   styleUrl: './user-tasks.component.css',
 })
-export class UserTasksComponent {
-  // @Input({ required: true }) userId!: string;
-  userId = input.required<string>();
+export class UserTasksComponent implements OnInit {
+  userName: string | undefined;
+
+  // userId = input.required<string>();
   private userSvc = inject(UsersService);
 
-  userName = computed(() => this.userSvc.users.find((u) => u.id === this.userId())?.name);
+  // alternative way of input userId in older angular app
+  private activatedRoute = inject(ActivatedRoute);
+
+  ngOnInit(): void {
+    this.activatedRoute.paramMap.subscribe({
+      next: paramMap => {
+        this.userName = this.userSvc.users.find(
+          (u) => u.id === paramMap.get('userId')
+        )?.name;
+      } //what ever the dynamic route param is
+
+    })
+  }
+
+  // userName = computed(() => this.userSvc.users.find((u) => u.id === this.userId())?.name);
 }
