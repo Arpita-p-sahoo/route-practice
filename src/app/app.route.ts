@@ -17,11 +17,13 @@ export const routes: Routes = [
         component: UserTasksComponent,
         children: [
             {
-                path: 'tasks',
+                path: 'tasks',            //?domain/user/uid/tasks
+                //*also this is the relative path tp its parent route i.e('users/:userId')(do not need to declare from the root)
                 component: TasksComponent
             },
             {
-                path: 'tasks/new',
+                path: 'tasks/new',          //?domain/user/uid/tasks/new 
+                //*also this is the relative path(do not need to declare from the root)
                 component: NewTaskComponent
             }
         ]
