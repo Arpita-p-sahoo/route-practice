@@ -28,7 +28,9 @@ export class NewTaskComponent {
       },
       this.userId()
     );
-    this.router.navigate(['/users', this.userId(), 'tasks']) //* need to give proper path from the root
+    this.router.navigate(['/users', this.userId(), 'tasks'], {
+      replaceUrl: true // user will not be back to the add task page once submitted
+    }) //* need to give proper path from the root
   }
 
 }
