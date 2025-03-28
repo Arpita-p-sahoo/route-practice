@@ -12,7 +12,7 @@ import { ActivatedRoute, RouterLink, RouterOutlet } from '@angular/router';
 export class UserTasksComponent implements OnInit {
   userName: string | undefined;
 
-  // userId = input.required<string>();
+  userId = input.required<string>();
   private userSvc = inject(UsersService);
 
   // alternative way of input userId in older angular app
